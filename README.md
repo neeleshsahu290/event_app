@@ -37,7 +37,7 @@ Users can search events, view event details, save favourites, toggle RTL layout,
 ## 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/event-app.git
+git clone https://github.com/neeleshsahu290/event_app.git
 cd event-app
 ```
 
@@ -80,6 +80,6 @@ npm run ios
 
 ---
 
-# 👨‍💻 Author
+#  Author
 
 **Neelesh Sahu**
