@@ -1,6 +1,7 @@
 import { AppAlert } from "@/app/components/alert";
 import PrimaryButton from "@/app/components/PrimaryButton";
 import PrimaryInputField from "@/app/components/PrimaryTextFeild";
+import * as Updates from 'expo-updates';
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, I18nManager, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useProfile } from "../hooks/useProfile";
@@ -14,11 +15,16 @@ const toggleRTL = () => {
     message: "Changing text direction requires restarting the app.",
     confirmText: "Restart",
     onConfirm: async () => {
-      const isRTL = !I18nManager.isRTL;
+      try {
+        const enableRTL = !I18nManager.isRTL;
 
-      I18nManager.forceRTL(isRTL);
-      I18nManager.allowRTL(isRTL);
-      // RNRestart.restart();
+        I18nManager.allowRTL(enableRTL);
+        I18nManager.forceRTL(enableRTL);
+
+       await Updates.reloadAsync();
+      } catch (error) {
+        console.log("RTL Switch Error:", error);
+      }
     },
   });
 };

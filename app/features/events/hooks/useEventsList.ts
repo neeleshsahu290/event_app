@@ -16,6 +16,8 @@ type EventStore = {
 
   init: () => Promise<void>;
   getEvents: () => Promise<void>;
+    getSearchEvents: () => Promise<void>;
+
   loadMore: () => Promise<void>;
   getFavouriteEvents: () => Promise<void>;
   handleFavourite: (event: Event) => Promise<void>;
@@ -40,7 +42,7 @@ export const useEventStore = create<EventStore>((set, get) => ({
   },
   onSearchClick:()=>{
      set({  isSearch: true, loading:true });
-    get().getEvents();
+    get().getSearchEvents();
   },
   clearSearch: () => {
     set({ searchEvents: [], searchText: "", isSearch: false });
@@ -65,12 +67,26 @@ export const useEventStore = create<EventStore>((set, get) => ({
       ...e,
       isFavourite: !!favMap[e.id],
     }));
-    if (get().isSearch === true) {
-      set({ searchEvents: merged, loading: false });
-    } else {
+  
       set({ events: merged, loading: false });
-    }
+    
   },
+  // get search events
+  getSearchEvents: async()=> {
+  set({ loading: true,  });
+
+    const data = await eventRepo.syncFromApi(0, 100,get().searchText);
+    const favMap = Object.fromEntries(get().favEvents.map((e) => [e.id, true]));
+
+    // merge favourite flags
+    const merged = data.map((e) => ({
+      ...e,
+      isFavourite: !!favMap[e.id],
+    }));
+      set({ searchEvents: merged, loading: false });
+  
+  },
+
 
   //  Load more events 
   loadMore: async () => {
@@ -91,19 +107,13 @@ export const useEventStore = create<EventStore>((set, get) => ({
       isFavourite: !!favMap[e.id],
     }));
 
-    if (get().isSearch === true) {
-      set({
-        searchEvents: [...get().searchEvents, ...merged],
-        page: nextPage,
-        loading: false,
-      });
-    } else {
+ 
       set({
         events: [...get().events, ...merged],
         page: nextPage,
         loading: false,
       });
-    }
+    
   },
 
   // get Favourites

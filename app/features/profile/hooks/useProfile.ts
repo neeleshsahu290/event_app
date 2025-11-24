@@ -9,10 +9,9 @@ export const useProfile = () => {
   const [loading, setLoading] = useState(true);
 
   const loadProfile = async () => {
-    console.log("done")
+   
     setLoading(true);
     const id = await authStorage.getUserId();
-        console.log("id"+id)
 
     if (!id) {
       setLoading(false);
@@ -20,9 +19,7 @@ export const useProfile = () => {
     }
 
     const result = await userRepo. getUser(id);
-        console.log("result")
 
-    console.log(result)
     setUser(result);
     setLoading(false);
   };

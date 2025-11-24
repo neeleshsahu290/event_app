@@ -54,8 +54,8 @@ export default SearchBar;
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    flex: 1,
+   // position: "absolute",
+  //  flex: 1,
     backgroundColor: "white",
     width: "100%",
     elevation: 1,
