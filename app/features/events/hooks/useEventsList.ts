@@ -46,7 +46,6 @@ export const useEventStore = create<EventStore>((set, get) => ({
     set({ searchEvents: [], searchText: "", isSearch: false });
   },
 
-  /** ⭐ Load events + favourites in parallel */
   init: async () => {
     set({ loading: true });
 
@@ -55,7 +54,6 @@ export const useEventStore = create<EventStore>((set, get) => ({
     set({ loading: false });
   },
 
-  /** 🔄 Refresh main event list */
   getEvents: async () => {
     set({ loading: true, page: 0, hasMore: true });
 
@@ -74,7 +72,7 @@ export const useEventStore = create<EventStore>((set, get) => ({
     }
   },
 
-  /** 🔄 Load more events */
+  //  Load more events 
   loadMore: async () => {
     const { page, hasMore, loading } = get();
     if (!hasMore || loading) return;
@@ -108,13 +106,13 @@ export const useEventStore = create<EventStore>((set, get) => ({
     }
   },
 
-  /** ⭐ Load favourite events only */
+  // get Favourites
   getFavouriteEvents: async () => {
     const favData = await eventRepo.getFavouriteEvents();
     set({ favEvents: favData });
   },
 
-  /** ❤️ Toggle favourite globally */
+  //  Toggle favourite 
   handleFavourite: async (event: Event) => {
     const newStatus = !event.isFavourite;
 

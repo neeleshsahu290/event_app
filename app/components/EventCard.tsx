@@ -1,5 +1,3 @@
-
-
 import { Event } from "@/app/bridge/types/eventTypes";
 import { wp } from "@/app/core/constants/dimensions";
 import { Ionicons } from "@expo/vector-icons";
@@ -9,14 +7,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 type Props = {
   item: Event;
   onFavouritePress?: (event: Event) => void;
-   navigation :any
+  navigation: any;
 };
 
-const EventCard = ({ item, onFavouritePress ,navigation}: Props) => {
-
+const EventCard = ({ item, onFavouritePress, navigation }: Props) => {
   const imageUrl =
-    item.url ||
-    "https://via.placeholder.com/500x300.png?text=No+Image";
+    item.url || "https://via.placeholder.com/500x300.png?text=No+Image";
 
   const isFav = item.isFavourite === true;
 
@@ -35,11 +31,12 @@ const EventCard = ({ item, onFavouritePress ,navigation}: Props) => {
           </Text>
 
           <Text style={styles.venue} numberOfLines={1}>
-            📍 {item.venue || "Unknown Venue"}
+            <Ionicons name="location-outline" size={16} />{" "}
+            {item.venue || "Unknown Venue"}
           </Text>
         </View>
 
-        {/* ❤️ Favourite Button */}
+        {/*  Favourite Button */}
         <TouchableOpacity
           onPress={() => onFavouritePress?.(item)}
           style={styles.favButton}
@@ -60,8 +57,6 @@ const EventCard = ({ item, onFavouritePress ,navigation}: Props) => {
     </TouchableOpacity>
   );
 };
-
-
 
 export default EventCard;
 

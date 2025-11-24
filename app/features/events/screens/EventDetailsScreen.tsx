@@ -27,17 +27,12 @@ export default function EventDetailsScreen() {
   const { event } = route.params;
 
   const { handleFavourite } = useEventStore();
-  const [isFav ,setIsFav] =useState(false)
-  
-  useEffect(()=>{
+  const [isFav, setIsFav] = useState(false);
 
-  const status = event.isFavourite ? true : false;
+  useEffect(() => {
+    const status = event.isFavourite ? true : false;
     setIsFav(status);
-  },[])
-
-
-
-
+  }, []);
 
   const openMap = () => {
     if (!event.latitude || !event.longitude) return;
@@ -51,17 +46,21 @@ export default function EventDetailsScreen() {
       <Image source={{ uri: event.url }} style={styles.image} />
 
       {/* BACK BUTTON */}
-      <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        style={styles.backBtn}
+        onPress={() => navigation.goBack()}
+      >
         <Ionicons name="arrow-back" size={26} color="#fff" />
       </TouchableOpacity>
 
       {/* FAVOURITE BUTTON */}
       <TouchableOpacity
         style={styles.favBtn}
-        onPress={() =>{ 
-          setIsFav(!isFav)
-          
-          handleFavourite(event)}}
+        onPress={() => {
+          setIsFav(!isFav);
+
+          handleFavourite(event);
+        }}
       >
         <Ionicons
           name={isFav ? "heart" : "heart-outline"}
@@ -73,18 +72,33 @@ export default function EventDetailsScreen() {
       <View style={styles.contentBox}>
         {/* Title + Venue */}
         <Text style={styles.title}>{event.title}</Text>
-        <Text style={styles.venue}>📍 {event.venue}</Text>
-        <Text style={styles.address}>{event.address}</Text>
+
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Ionicons name="location-outline" size={18} />
+          <Text style={[styles.venue, { marginLeft: 4 }]}>
+            {event.venue || "Unknown Venue"}
+          </Text>
+        </View>
+
+        <Text style={styles.address}>
+          {event.address || "No address available"}
+        </Text>
 
         {/* Date */}
-        <Text style={styles.date}>📅 {event.date}</Text>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}
+        >
+          <Ionicons name="calendar-outline" size={18} />
+          <Text style={[styles.date, { marginLeft: 4 }]}>
+            {event.date || "Unknown Date"}
+          </Text>
+        </View>
 
         {/* Description */}
         <Text style={styles.description}>
           {event.description || "No description available."}
         </Text>
 
-    
         {event.latitude && event.longitude ? (
           <View style={styles.mapContainer}>
             <MapView
@@ -130,7 +144,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   favBtn: {
-     position: "absolute",
+    position: "absolute",
     top: 20,
     right: 20,
     backgroundColor: "rgba(255,255,255,0.7)",

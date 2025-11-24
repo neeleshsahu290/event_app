@@ -1,40 +1,29 @@
-// src/features/profile/screens/ProfileScreen.tsx
+import { AppAlert } from "@/app/components/alert";
 import PrimaryButton from "@/app/components/PrimaryButton";
 import PrimaryInputField from "@/app/components/PrimaryTextFeild";
-import { useRTL } from "@/app/core/localization/RTLState";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, I18nManager, Image, StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, I18nManager, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useProfile } from "../hooks/useProfile";
 
 const ProfileScreen = ({ navigation }: any) => {
 
  
+const toggleRTL = () => {
+  AppAlert({
+    title: "Restart Required",
+    message: "Changing text direction requires restarting the app.",
+    confirmText: "Restart",
+    onConfirm: async () => {
+      const isRTL = !I18nManager.isRTL;
 
-// const toggleRTL1 = async () => {
-//   Alert.alert(
-//     "Restart Required",
-//     "Changing text direction requires restarting the app.",
-//     [
-//       { text: "Cancel", style: "cancel" },
-//       {
-//         text: "Restart",
-//         style: "destructive",
-//         onPress: async () => {
-//           const isRTL = !I18nManager.isRTL;
+      I18nManager.forceRTL(isRTL);
+      I18nManager.allowRTL(isRTL);
+      // RNRestart.restart();
+    },
+  });
+};
 
-
-//           I18nManager.forceRTL(isRTL);
-//           I18nManager.allowRTL(isRTL);
-
-        
-//         },
-//       },
-//     ]
-//   );
-// };
-
-  const { user, loading, updateProfile, logout, refresh } = useProfile();
-    const {isRTL,toggleRTL} = useRTL();
+  const { user, loading, updateProfile, logout, loadProfile } = useProfile();
   
 
   const [name, setName] = useState("");
@@ -45,7 +34,7 @@ const ProfileScreen = ({ navigation }: any) => {
 
   useEffect(() => {
     const load = async () => {
-      await refresh();
+      await loadProfile();
     };
     load();
     
@@ -106,18 +95,8 @@ const ProfileScreen = ({ navigation }: any) => {
         multiline
         editable={isEditing}
       />
-      {/* RTL Toggle */}
-<View style={styles.toggleRow}>
-  <Text style={styles.toggleLabel}>Switch RTL</Text>
-  <Switch
-    value={isRTL}
-    onValueChange={toggleRTL}
-  />
 
-
-  
-</View>
-  <TouchableOpacity  style={styles.rtlButton}>
+  <TouchableOpacity onPress={toggleRTL} style={styles.rtlButton}>
   <Text style={styles.rtlText}>
     Switch to {I18nManager.isRTL ? "LTR" : "RTL"}
   </Text>

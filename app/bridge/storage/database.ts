@@ -1,11 +1,8 @@
-// src/database/database.ts
 import * as SQLite from "expo-sqlite";
 
 let db: SQLite.SQLiteDatabase | null = null;
 
-// ---------------------------------------------------------
 // Open Database
-// ---------------------------------------------------------
 export const getDBConnection = async () => {
   if (!db) {
     db = await SQLite.openDatabaseAsync("app.db");
@@ -13,9 +10,8 @@ export const getDBConnection = async () => {
   return db;
 };
 
-// ---------------------------------------------------------
+
 // Initialize All Tables (Events + Users)
-// ---------------------------------------------------------
 export const initDatabase = async () => {
   const database = await getDBConnection();
 

@@ -22,7 +22,6 @@ export default function TabNavigator() {
           backgroundColor: "white",
           height: 60,
           borderTopWidth: 0,
-        //  position: "absolute",
           paddingBottom: 0,
         },
       }}

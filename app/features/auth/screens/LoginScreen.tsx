@@ -1,4 +1,3 @@
-// screens/LoginScreen.tsx
 import NavLink from "@/app/components/NavLink";
 import PrimaryButton from "@/app/components/PrimaryButton";
 import PrimaryInputField from "@/app/components/PrimaryTextFeild";
@@ -22,7 +21,7 @@ const LoginScreen = ({ navigation }: any) => {
   const handleLogin = async () => {
     const success = await login();
     if (success) {
-      navigation.replace("Main"); // move to home
+      navigation.replace("Main"); 
     }
   };
 

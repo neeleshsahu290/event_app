@@ -1,8 +1,8 @@
- // src/features/profile/hooks/useProfile.ts
 import { userRepo } from "@/app/bridge/repo/userRepo";
 import { authStorage } from "@/app/bridge/storage/authStorage";
 import { User } from "@/app/bridge/types/userTypes";
 import { useState } from "react";
+import { Alert, I18nManager } from "react-native";
 
 export const useProfile = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -41,13 +41,36 @@ export const useProfile = () => {
     await authStorage.logout();
   };
 
+  const toggleRTL = async () => {
+    Alert.alert(
+      "Restart Required",
+      "Changing text direction requires restarting the app.",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Restart",
+          style: "destructive",
+          onPress: async () => {
+            const isRTL = !I18nManager.isRTL;
+  
+  
+            I18nManager.forceRTL(isRTL);
+            I18nManager.allowRTL(isRTL);
+  
+          
+          },
+        },
+      ]
+    );
+  };
+  
 
   return {
     user,
     loading,
-    refresh: loadProfile,
     updateProfile,
     logout,
-    loadProfile
+    loadProfile,
+    toggleRTL
   };
 };

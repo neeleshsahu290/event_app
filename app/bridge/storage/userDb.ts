@@ -1,9 +1,7 @@
 import { User } from "../types/userTypes";
 import { getDBConnection } from "./database";
 
-// ---------------------------------------------------------
 // Add a new user (Signup)
-// ---------------------------------------------------------
 export const addUser = async (
   name: string,
   address: string,
@@ -34,9 +32,7 @@ export const addUser = async (
   }
 };
 
-// ---------------------------------------------------------
 // Validate Login (email + password)
-// ---------------------------------------------------------
 export const loginUser = async (
   email: string,
   password: string
@@ -51,9 +47,7 @@ export const loginUser = async (
   return result ?? null;
 };
 
-// ---------------------------------------------------------
 // Get user by ID (strict User type)
-// ---------------------------------------------------------
 export const getUserById = async (id: number): Promise<User | null> => {
   const db = await getDBConnection();
 
@@ -65,9 +59,7 @@ export const getUserById = async (id: number): Promise<User | null> => {
   return result ?? null;
 };
 
-// ---------------------------------------------------------
 // Update user profile
-// ---------------------------------------------------------
 export const updateUser = async (
   id: number,
   name: string,

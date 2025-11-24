@@ -1,4 +1,3 @@
-// SplashScreen.tsx
 import { authStorage } from "@/app/bridge/storage/authStorage";
 import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";

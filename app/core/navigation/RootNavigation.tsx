@@ -6,8 +6,6 @@ import EventDetailsScreen from '@/app/features/events/screens/EventDetailsScreen
 import React from 'react';
 import SplashScreen from '../../features/auth/screens/SplashScreen';
 import TabNavigator from './TabNavigator';
-// import TabsNavigator from './TabsNavigator';
-// import EventDetailsScreen from '../../features/events/screens/EventDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 

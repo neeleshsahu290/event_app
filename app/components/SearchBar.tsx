@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 
   clearBtn: {
     fontSize: 14,
-    color: "#E63946", // red clear button
+    color: "#E63946", 
     fontWeight: "600",
   },
 });

@@ -1,4 +1,3 @@
-// src/database/events.db.ts
 import { Event } from "../types/eventTypes";
 import { getDBConnection } from "./database";
 
