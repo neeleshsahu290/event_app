@@ -22,14 +22,10 @@ Users can search events, view event details, save favourites, toggle RTL layout,
 ##  Tech Stack
 
 - **Expo 54 + React Native 0.81**
-- **React 19**
-- **Zustand** (state management)
+- **Squlite**
 - **AsyncStorage** (local data storage)
-- **React Navigation 7**
-- **Expo Updates** (app reload + OTA updates)
-- **Expo Router** (file-based navigation)
+- **React Navigation**
 - **React Native Maps** (map preview)
-- **Firebase** (optional auth/storage)
 - **Expo Vector Icons (Ionicons)**
 
 # 🛠️ Installation & Setup
@@ -62,20 +58,13 @@ npx expo install
 ## 4️⃣ Start the App
 
 ```bash
-npm start
+npm start expo
 ```
 
 or
 
 ```bash
-yarn start
-```
-
-Open with Expo Go or:
-
-```bash
-npm run android
-npm run ios
+yarn start expo
 ```
 
 ---

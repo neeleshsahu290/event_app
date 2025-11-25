@@ -21,7 +21,7 @@ const toggleRTL = () => {
         I18nManager.allowRTL(enableRTL);
         I18nManager.forceRTL(enableRTL);
 
-       await Updates.reloadAsync();
+         await Updates.reloadAsync();
       } catch (error) {
         console.log("RTL Switch Error:", error);
       }
