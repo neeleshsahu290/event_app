@@ -9,7 +9,7 @@ import { Event, EventsData, EventsEntity } from "@/app/bridge/types/eventTypes";
 export const eventRepo = {
   syncFromApi: async (page: number = 0, size:number=20, search?:string): Promise<Event[]> => {
     const response: EventsData = await ApiManager.getEvents({
-      apikey: "9jWkSWvIFHbOQZiyHLkeoqrtBQsEmBBI",
+      apikey: "<Api key>",
       classificationName: "music",
       dmaId: 324,
       page: page,
